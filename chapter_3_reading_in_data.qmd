@@ -1,0 +1,17 @@
+---
+title: "chapter 3: reading in and exporting data"
+format: html
+jupyter: quarto
+---
+
+## File paths
+* Absolute file locations include stuff like our username for internal work
+* Relative path is the location relative to the working directory which 
+begins with .. so it can work for everyone whos working directory is set to 
+same notebooks folder
+* Two full stops .. - the code we use can go back up a level in the folder
+structure because we can't move directly between subfolders in directory
+* Recommend forward slashes in file paths - windows explorer often has back 
+slashes which can cause issues further down line
+
+## Flat files
