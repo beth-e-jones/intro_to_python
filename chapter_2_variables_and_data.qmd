@@ -1,0 +1,151 @@
+---
+title: "Chapter 2: variables, data types, and data structures"
+format: html
+jupyter: quarto
+
+
+## Variables
+
+* 	• When we create objects in Python we assign it to a variable.
+* Easy to overwrite variables - beware!
+* Naming conventions - names have to start with a letter or underscore, case sensitive, and can't have hyphens, use underscores not spaces
+* See Duck book, data science campus style guide, or Python pep8 for standards
+* Adding df, model, or list suggests that the contents are dataframes, models, 
+or lists respectively
+
+### Data types
+* Numerical (int = whole numbers, float = floating point decimals)
+* String (contained within single or double quotation marks)
+* Booleans (Case sensitive so need capital first letters)
+* Can convert between data types with float(), int(), str()
+
+```{python}
+age = 31
+height = 1.6
+
+print("My age is", age, "and my height is", str(height)+"m")
+```
+
+Use type() to find out what the type is, and this works for variables too
+
+## Data structures
+* Python is an object orientated programming language
+* We create objects to do things to
+* Class = a template for how all instances of that object are created. Objects
+of the same class may look different but have key elements that are the same
+* **Objects** have methods (actions we do) and attributes (descriptive info) 
+which are usually specialised e.g., stirngs can be lower case but floats can't
+
+```{python}
+parrots = ["Cockatoo" , "Macaw", "Parakeet", "Lorikeet", "Norwegian Blue", "Conure"]
+```
+
+
+### Tuples
+Bit like lists, but are unchangeable and created when putting a comma between
+items. Created with round brackets.
+```{python}
+pets = ("Clawdia", "Fuzz Aldrin", "David Meowie")
+```
+
+It's important to know we can't use .append() or .extend() or similar on tuples, we can only overwrite them. 
+
+### Dictionaries
+Dictionaries - store collection of objects, and are unordered, changeable and
+can contain lists or other dictionaries. Created with {}
+
+* Dictionaries contain key value pairs.
+* Keys are usually integers or strings (an immutable data type)
+* Values can be any type of object
+* Keys and values are separated by a colon
+* Indexing works the same as R with [number]
+
+```{python}
+brian_information = {"name": "Brian Cohen",
+                     "occupation": ["messiah ", "very naughty boy"],
+                     "enemy": "Pontius Pilate",
+                     "outlook": "Look on the bright side of life"}
+
+brian_information
+```
+
+As the example shows, the key can include lists (as it does in occupation)
+
+Worked exercise
+
+```{python}
+bristol_teams = {"city": "Bristol",
+                "football": ["bristol_city", "bristol_rovers"],
+                "basketball": "bristol_flyers"
+}
+bristol_teams   
+```
+
+
+## Indexing
+* Python starts indexing at 0
+*  There’s no direct inbuilt way of accessing non sequential items
+* Indexing a dictionary is slightly different from indexing a list
+
+```{python}
+pets[2]
+
+ #or
+print(pets[0], pets[-1])
+
+#or
+pets[0:1]
+```
+
+* for non-sequential items, use itemgetter function
+
+### Indexing a dictionary
+* Indexing a dictionary is different, as you use the key instead of numerical
+index. Don't forget the string "!
+
+```{python}
+brian_information["name"]
+```
+
+## Functions
+* Functions are pieces of code that are called by name. They are a set of 
+statements that take inputs, do something to it, and produce an output.
+* If something is descriptive about an object, we’ll often use attributes to 
+return information. Attributes are called like methods, using dot notation. 
+However, they do not have round brackets.
+
+```{python}
+# Attribute test
+parrots.sort()
+```
+
+```{python}
+# Create list to add on
+more_parrots = ["Lovebird", "Rosella", "kea"]
+```
+
+```{python}
+# Extend original list using new list
+parrots.extend(more_parrots)
+
+# Return extended list
+parrots
+```
+
+* Libraries often known as packages
+* Need to import packages before using (at top of script)
+* Artifactory to get packages
+* Typically add nicknames to packages e.g., pandas as pd
+* Check version numbers to be sure using most appropriate version
+* Pandas adds 2 new object types - a series, which is like a 1 dimensional array and dataframes (like spreadsheets)
+
+## Attributes
+* Gives information about an object
+* E.g., parrots.shape
+
+List of attribute methods
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 
+'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+
+* Use help(function) to get information and help
