@@ -1,0 +1,19 @@
+---
+title: "Chapter 1: getting started with python"
+format: html
+jupyter: quarto
+---
+
+## Background
+
+*   Can use Jupyter notebooks whcih is an Integrated Development        Environment, which have extension .ipynb
+* Can embed a jupyter cell into quarto by writing ```{python} and  the 3 back ticks again after
+
+```{python}
+3+4
+```
+
+* Jupyter has 2 parts, the kernel (the bit that runs the code) and a dashboard (basically a user interface)
+* In Jupyter, code is written in cells
+* We can add explanatory text in notebooks using markdown, and in Jupyter notebooks we can toggle between code and markdown in the drop-down menu 
+* When writing in markdown, use the # for headers of various sizes, bold is two ** s on either side (**like this** ) and italics is just the one * (*like this*)
