@@ -15,3 +15,30 @@ structure because we can't move directly between subfolders in directory
 slashes which can cause issues further down line
 
 ## Flat files
+* Use pandas to read in files 
+* Flat files are CSV or .txt files where stuff is stored in a single table
+* Need to define the dataframe to name it 
+* Need to specify file extension and use .. when moving up a file in the file path
+* When importing excel documents you can specify specific spreadsheets by adding , and then a number within the brackets (remember Python starts at 0)
+
+```{python}
+import pandas as pd
+```
+
+```{python}
+animals = pd.read_csv("data/animals.csv")
+animals.head() # Checks first five rows
+```
+
+* Can use docstrings to see the arguments we specify - including skipping rows, including comments, parameters and arguments
+* Some parameters are optional and most have default arguments
+
+**Python tip**
+Pressing tab button offers suggestions e.g.pd.to_ then tab
+
+
+### Exporting data
+* When we load data into Python using Pandas we create a temporary copy of it within our session
+* Any changes we make to the data won’t be reflected in the saved file.
+* For example if you deleted columns, and closed your Python script without exporting the data – your data would still have all of it’s columns when you reloaded it in
+* pd.to_ will allow you to export data to other files
