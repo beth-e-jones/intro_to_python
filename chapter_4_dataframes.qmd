@@ -1,0 +1,76 @@
+---
+title: "Untitled"
+format: html
+jupyter: quarto
+---
+
+## Importing packages and datasets
+For the exercises in this chapter, we have to import things.
+```{python}
+import pandas as pd
+```
+
+and then import all the datasets we need;. .. not needed as the data folder is on the same level as this notebook in the file structure/filepath.
+```{python}
+animals = pd.read_csv("data/animals.csv")
+titanic = pd.read_excel("data/titanic.xlsx")
+joining_data1 = pd.read_csv("data/joining_data1.csv")
+joining_data2 = pd.read_csv("data/joining_data2.csv")
+union_join_data = pd.read_csv("data/union_data.csv")
+marvel_left = pd.read_csv("data/joining_exercise1.csv")
+marvel_right = pd.read_csv("data/joining_exercise2.csv")
+```
+
+We can check how the data looks with .head() - first 5 rows, .tail() - last 5 rows, and .sample() - random row. The () comes after because it's a function. 
+
+```{python}
+animals.head()
+```
+
+Other useful functions to summarise data include .info() for classes, ranges, number of columns and names, NaN values etc. and .shape() for the length and width. 
+
+```{python}
+animals.info()
+```
+
+We can do .info and .shape for individual columns based on their index position:
+```{python}
+animals.shape[1]
+```
+
+Exercise 2.3
+```{python}
+titanic.info()
+```
+
+```{python}
+len(titanic)
+```
+
+```{python}
+len(titanic.columns)
+``` 
+
+We can check types of data in each column using .dtypes and the list of columns with .columnns
+
+```{python}
+titanic.dtypes
+``` 
+
+We can see details like head and tail subset by putting them into square brackets before the . e.g.,
+animals["AnimalClass"].head()
+
+```{python}
+titanic.columns.tolist()
+```
+
+## Sorting data
+* We can sort data by specific columsn and add arguments, e.g.,
+animals_sorted = animals.sort_values(by="IncidentNominalCost(£)", ascending=False)
+* When sorting by more than one column in descending order, it's best to specify ascending= as a list. This keeps the list same order as columns
+* Some versions of Pandas will sort both columns as descending if we just supply ascending = False ; however some won’t – so it’s better to be clear
+
+```{python}
+titanic.sort_values(by="age")
+
+```
