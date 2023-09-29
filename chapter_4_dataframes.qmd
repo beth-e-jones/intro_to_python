@@ -74,3 +74,156 @@ animals_sorted = animals.sort_values(by="IncidentNominalCost(£)", ascending=Fal
 titanic.sort_values(by="age")
 
 ```
+
+Exercise 2 - sort by age and sex
+```{python}
+titanic_sorted = titanic.sort_values (by=["sex","age"])
+titanic_sorted.head()
+```
+
+## Parameters
+* Parameters are words that tell python what the arguments do e.g., by=, ascending=
+* If we don't specify parameters, python will assume it sin the order specified (hover over function to see the parameters list, or look on pandas website)
+* It is considered good practice to use parameters before your arguments
+* When you do use parameters in the arguemnts, you don't have to worry so much about ordering because python has all the info it needs
+
+### Subsetting 
+## Single columns
+* We can create whittled down smaller data frames containing just the columns we need
+* I know how to drop columns, but we can create a series with just the columns we need too
+
+```{python}
+ animal_grp_parent = animals["AnimalGroupParent"]
+ animal_grp_parent.head()
+```
+
+
+Exercise - select fare column from titanic
+```{python}
+titanic_fare = titanic["fare"]
+titanic_fare.tail()
+```
+
+If you want to select multiple columns for use, create a list of columns and define a new dataframe as this list of columns
+
+```{python}
+
+# Making the list here
+```
+
+
+
+```{python}
+titanic_subset_list = ["name", "sex", "age", "survived"]
+
+```
+
+
+```{python}
+titanic_subset_df = titanic[titanic_subset_list]
+titanic_subset_df.head()
+```
+
+* Don't do this via dataframe.column_name because it looks too much like an attribute or a method 
+
+## Data type
+We can also subset based on data types:
+* "object" includes string columns
+* "float64" and "int64" will select floating point and integer numbers respectively
+* you can also do exclude= instead of include=
+
+```{python}
+# Select only object data types
+animal_object_cols = animals.select_dtypes(include=["object"])
+animal_object_cols.head()
+```
+
+## Filtering
+* we can do basic filtering with a range using the indexer e.g., animals [0:5]
+
+```{python}
+animals[0:]
+```
+
+I wonder if you can do a subset, then an index from there. Let's test:
+```{python}
+titanic_subset_df [0:3]
+```
+
+Yes you can! 
+
+ ## Single conditional filtering
+ * Pandas filters data in a two step process
+ * First, it makes a mask that specifies inclusion or exclusion for each row in the DataFrame
+ * Next, it sort of overlays the mask on the dataframe just to bring what is needed
+
+
+```{python}
+cost_over_1k = animals[animals['IncidentNominalCost(£)'] > 1000]
+cost_over_1k.sample(6)
+```
+
+```{python}
+titanic_female = titanic[titanic["sex"] == "female"]
+titanic_female.head()
+
+```
+
+```{python}
+titanic_over40 = titanic[titanic["age"] <= 40]
+titanic_over40.head()
+```
+
+
+```{python}
+titanic_30_to_50 = titanic[titanic["fare"] <= 30.50]
+titanic_30_to_50.head()
+```
+
+## Multiple conditional filtering
+* AND relationships use the & symbol and require both or all conditions to evaluate to True.
+* OR relationships use the | symbol  and require one of the conditions to evaluate to True
+* As an example: mask = (cat_dog['animal'] == "Cat") & (cat_dog['age'] > 4)
+* The first condition statement has round brackets, states first column is animal from the cat_dog df, and the condition required
+* The second condition is separated by the &, suggested we only want to return the stuff that meets both conditions
+* Second condition states second column is in age, with values above 4
+* We mark or with a vertical bar | (shift and \)
+
+## Filtering text
+We can filter for text too, which is important because python is case sensitive so we could have case issues or spelling errors that stop things getting found.
+
+We check here by making a data frame with variation in capitalisation of cat
+
+```{python}
+cat_dog_wrong_spelling = pd.DataFrame({"animal": ["cat", "Cat", "Dog", "cat", "Dog", "Rat", "Bat"] , 
+                                       "name": ["Catalie Portman","Pico de Gato", "Chewbarka", "Sir Isaac Mewton", "K9", "Roland", "Vlad"],
+                                       "age": [3, 5, 1, 7, 11, 1, 3]} , 
+                                      columns = ["name", "animal", "age"])
+
+```
+
+When we've got this included dataframe, running a mask to filter for Cat will miss the ones with lower case
+
+```{python}
+cat_only_spelling = cat_dog_wrong_spelling[cat_dog_wrong_spelling["animal"] == "Cat"]
+cat_only_spelling
+```
+
+So we'll need to use .str.contains("at") to filter for strings that contain "at"
+```{python}
+cat_only_spelling = cat_dog_wrong_spelling[cat_dog_wrong_spelling["animal"].str.contains("at")]
+cat_only_spelling
+```
+
+** reg expressions worth a read https://docs.python.org/3/howto/regex.html and https://developers.google.com/edu/python/regular-expressions
+**
+
+## Deriving new columns
+* Constant values are values that are the same throughout a column
+* we make them by adding = after the assignment operator
+```{python}
+# e.g.
+animals["attended"] = "True"
+animals.head()
+```
+* FYI NaN values are automatically false on a boolean
